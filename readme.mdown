@@ -1,0 +1,17 @@
+# Readme #
+This repo is a collection of scripts to push data from a google drive spreadsheet to RJMEtrics.
+
+## Requirements ##
+Because this is using v1 of the RJMetrics import api, there needs to be a column with the header "_id", and the values of an auto-incrementing integer. This column can never be blank, so if there are any empty rows, make sure they have this values for this column.
+
+This connector assumes you have headers in in the spreadsheet in row 1 of the spreadsheet.
+
+## Intallation ##
+
+1. Open the spreadsheet to push to RJMetrics
+2. Click Tools, Script Manager, and then "New". Click Close on the Popup.
+3. You can put all of the contents of the script files in one .gs document, or keep them separated. The script docs can be named whatever you want too.
+4. Make sure all of the script files are saved and exit that interface.
+5. Go back to the spreadsheet and refresh the page. If you don't see a new dropdown in the toolbar titld "RJMetrics Import", close the spreadsheet and re-open it.
+6. In the "RJMetrics Import" dropdown, click "Change API Key". Enter api key and client id provided in your RJMetrics account.
+7. In the "RJMetrics Import" dropdown, click "Sync with RJMetrics"
