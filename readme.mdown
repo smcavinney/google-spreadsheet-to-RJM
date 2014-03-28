@@ -1,6 +1,9 @@
 # Readme #
 This repo is a collection of scripts to push data from a google drive spreadsheet to RJMEtrics.
 
+**PLEASE NOTE:**  
+This app is not endorsed or supported by RJMetrics Inc. Please feel free to contribute to this repository 
+
 ## Requirements ##
 Because this is using v1 of the RJMetrics import api, there needs to be a column with the header "_id", and the values of an auto-incrementing integer. This column can never be blank, so if there are any empty rows, make sure they have this values for this column.
 
@@ -15,3 +18,26 @@ This connector assumes you have headers in in the spreadsheet in row 1 of the sp
 5. Go back to the spreadsheet and refresh the page. If you don't see a new dropdown in the toolbar titld "RJMetrics Import", close the spreadsheet and re-open it.
 6. In the "RJMetrics Import" dropdown, click "Change API Key". Enter api key and client id provided in your RJMetrics account.
 7. In the "RJMetrics Import" dropdown, click "Sync with RJMetrics"
+
+## LICENSE ##
+
+The MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
