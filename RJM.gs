@@ -6,17 +6,33 @@ function push(){
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var range = sheet.getDataRange();
   var lastcolumn = range.getLastColumn();
-  var tablename = ss.getSheetName();
+  var tablename = ss.getName();
   var firstrow = 2
 // last row minus 1 assuming the first row is headers
   var lastrow = range.getLastRow() - 1;
   var i = 101;
-  if (lastrow >= i){
+
+  if (lastrow > i){
     largedoc(lastrow, lastcolumn, i, tablename, sheet)
     
   }
   else {smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet)};
   
+}
+
+function insertKeys(spreadsheetdata){
+ var new_array = []
+ var arrayLength = spreadsheetdata.length;
+  for (var i = 0; i < arrayLength; i++) {
+    var keys = (Object.keys(spreadsheetdata[i]));
+    var record = spreadsheetdata[i];
+    record['keys'] = keys;
+    new_array.push(record);
+    Logger.clear();
+    Logger.log(record);
+  }
+  
+  return new_array
 }
 
 function largedoc(lastrow, lastcolumn, i, tablename, sheet){
@@ -26,13 +42,17 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet){
   // send 100 rows at a time, asyncronosly. 
   while (lastrow >= i){
     firstrow = firstrow + 100
-    Logger.log('rows ' + firstrow + " - " + i);
-    var datarange = sheet.getRange(firstrow, 1, i, lastcolumn);
+    Logger.log('rows ' + firstrow + " - " + (firstrow + 100));
+    var datarange = sheet.getRange(firstrow, 1, 100, lastcolumn);
+    Logger.log("datarange = " + datarange.getNumRows())
     var spreadsheetdata = getRowsData(sheet, datarange, 1);
-    var payload = JSON.stringify(spreadsheetdata);
+    var payload_pre = insertKeys(spreadsheetdata);
+    var payload = JSON.stringify(payload_pre);
+    Logger.log("Payload Length" + spreadsheetdata.length)
+    //Logger.clear();
     var api = ScriptProperties.getProperty('RJMETRICSKEY');
     var cid = ScriptProperties.getProperty('RJMETRICSCID');
-    var url = 'https://connect.rjmetrics.com/v1/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
+    var url = 'https://connect.rjmetrics.com/v2/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
     var options = {
       'method': 'post',
       "contentType" : "application/json",
@@ -51,13 +71,16 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet){
 function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet){
   Logger.log('starting last rows');
   Logger.log('rows ' + firstrow + " - " + lastrow);
-  var datarange = sheet.getRange(firstrow, 1, lastrow, lastcolumn);
+  var datarange = sheet.getRange(firstrow, 1, 100, lastcolumn);
   var spreadsheetdata = getRowsData(sheet, datarange, 1);
-  var payload = JSON.stringify(spreadsheetdata);
+  var payload_pre = insertKeys(spreadsheetdata);
+  Logger.log("Payload Length" + spreadsheetdata.length);
+  var payload = JSON.stringify(payload_pre);
+  //Logger.clear();
+  //Logger.log(payload_pre.length);
   var api = ScriptProperties.getProperty('RJMETRICSKEY');
   var cid = ScriptProperties.getProperty('RJMETRICSCID');
-  
-  var url = 'https://connect.rjmetrics.com/v1/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
+  var url = 'https://connect.rjmetrics.com/v2/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
   var options = {
     'method': 'post',
     "contentType" : "application/json",
@@ -66,3 +89,4 @@ function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet){
   var response = UrlFetchApp.fetch(url, options);
   return response
 }
+
