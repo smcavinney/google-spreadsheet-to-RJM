@@ -2,7 +2,7 @@
 This repo is a collection of scripts to push data from a google drive spreadsheet to RJMEtrics.
 
 ## UPDATE ##
-Recently migrated to RJMEtrics import V2. This is much easier to develope for, and does not require a "_id" column in the spreadsheet.
+Recently migrated to RJMEtrics import V2. This is much easier to develop for, and does not require a "_id" column in the spreadsheet.
 
 **PLEASE NOTE:**  
 This app is not endorsed or supported by RJMetrics Inc. Please feel free to contribute to this repository 
