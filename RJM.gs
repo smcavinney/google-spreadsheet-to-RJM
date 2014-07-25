@@ -28,8 +28,8 @@ function insertKeys(spreadsheetdata){
     var record = spreadsheetdata[i];
     record['keys'] = keys;
     new_array.push(record);
-    Logger.clear();
-    Logger.log(record);
+    //Logger.clear();
+    //Logger.log(record);
   }
   
   return new_array
@@ -59,6 +59,7 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet){
       "payload": payload
     };
     var response = UrlFetchApp.fetch(url, options);
+    Logger.log(response);
     i = i + 100;
     // Uncomment if the import api is having issues is giving 504s or other connection errors.This make the script take a while to complete however.
     // Utilities.sleep(10000);
@@ -87,6 +88,6 @@ function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet){
     "payload": payload
   };
   var response = UrlFetchApp.fetch(url, options);
+  Logger.log(response);
   return response
 }
-
