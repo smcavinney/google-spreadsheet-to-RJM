@@ -14,7 +14,7 @@ This connector assumes you have headers in in the spreadsheet in row 1 of the sp
 
 1. Open the spreadsheet to push to RJMetrics
 2. Click Tools, Script Manager, and then "New". Click Close on the Popup.
-3. You can put all of the contents of the script files in one .gs document, or keep them separated. The script docs can be named whatever you want too.
+3. Add each of the files in this repo as a new .gs document by clicking file/new/script file. The script docs can be named whatever you want too.
 4. Make sure all of the script files are saved and exit that interface.
 5. Go back to the spreadsheet and refresh the page. If you don't see a new dropdown in the toolbar titld "RJMetrics Import", close the spreadsheet and re-open it.
 6. In the "RJMetrics Import" dropdown, click "Change API Key". Enter api key and client id provided in your RJMetrics account.
