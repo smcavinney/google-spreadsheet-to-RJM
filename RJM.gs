@@ -53,7 +53,7 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet, newkey){
     //Logger.clear();
     var api = ScriptProperties.getProperty('RJMETRICSKEY');
     var cid = ScriptProperties.getProperty('RJMETRICSCID');
-    var url = 'https://sandbox-connect.rjmetrics.com/v2/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
+    var url = 'https://connect.rjmetrics.com/v2/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
     var options = {
       'method': 'post',
       "contentType" : "application/json",
