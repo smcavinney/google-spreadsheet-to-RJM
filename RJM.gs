@@ -8,7 +8,7 @@ function push(){
   var lastcolumn = range.getLastColumn();
   var newkey = normalizeHeaders(ScriptProperties.getProperty('PRIMARYKEY').split(','));
 
-  var tablename = ss.getName();
+  var tablename = sheet.getSheetName();
   var firstrow = 2
 // last row minus 1 assuming the first row is headers
   var lastrow = range.getLastRow() - 1;
