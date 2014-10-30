@@ -9,7 +9,7 @@ This connector assumes you have headers in in the spreadsheet in row 1 of the sp
 This connectior __will not work__ if you define more than 8 columns as keys.
 The tab name __must__ only include alpha-numeric characters. Replace spaces with dots.
 
-## Intallation ##
+## Installation ##
 
 1. Open the spreadsheet to push to RJMetrics.
 2. Click Tools, Script Manager, and then "New". Click Close on the Popup.
