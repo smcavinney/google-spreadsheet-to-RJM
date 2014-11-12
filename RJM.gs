@@ -72,13 +72,13 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet, newkey){
 function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet, newkey){
   //Logger.log('starting last rows');
   //Logger.log('rows ' + firstrow + " - " + lastrow);
-  var datarange = sheet.getRange(firstrow, 1, 100, lastcolumn);
+  var datarange = sheet.getRange(firstrow, 1, lastrow, lastcolumn);
   var spreadsheetdata = getRowsData(sheet, datarange, 1);
   var payload_pre = insertKeys(spreadsheetdata, newkey);
   //Logger.log("Payload Length" + spreadsheetdata.length);
   var payload = JSON.stringify(payload_pre);
   //Logger.clear();
-  //Logger.log(payload_pre.length);
+  Logger.log(payload_pre.length);
   var api = ScriptProperties.getProperty('RJMETRICSKEY');
   var cid = ScriptProperties.getProperty('RJMETRICSCID');
   var url = 'https://connect.rjmetrics.com/v2/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
@@ -88,6 +88,6 @@ function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet, newkey){
     "payload": payload
   };
   var response = UrlFetchApp.fetch(url, options);
+  Logger.log(response);
   return response
 }
-
