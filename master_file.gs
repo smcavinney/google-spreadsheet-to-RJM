@@ -2,6 +2,7 @@
 // or send the entire dataset,depending on the size of the document
 
 function push(){
+  Logger.log('test');
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var range = sheet.getDataRange();
@@ -12,8 +13,9 @@ function push(){
   var firstrow = 2
 // last row minus 1 assuming the first row is headers
   var lastrow = range.getLastRow() - 1;
+  
   var i = 101;
-
+  Logger.log(i);
   if (lastrow > i){
     largedoc(lastrow, lastcolumn, i, tablename, sheet, newkey)
     
@@ -43,14 +45,14 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet, newkey){
   // send 100 rows at a time, asyncronosly. 
   while (lastrow >= i){
     firstrow = firstrow + 100
-    //Logger.log('rows ' + firstrow + " - " + (firstrow + 100));
+    Logger.log('rows ' + firstrow + " - " + (firstrow + 100));
     var datarange = sheet.getRange(firstrow, 1, 100, lastcolumn);
-    //Logger.log("datarange = " + datarange.getNumRows())
+    Logger.log("datarange = " + datarange.getNumRows())
     var spreadsheetdata = getRowsData(sheet, datarange, 1);
     var payload_pre = insertKeys(spreadsheetdata, newkey);
     var payload = JSON.stringify(payload_pre);
-    //Logger.log("Payload Length" + spreadsheetdata.length)
-    //Logger.clear();
+    Logger.log("Payload Length" + spreadsheetdata.length)
+    Logger.clear();
     var api = ScriptProperties.getProperty('RJMETRICSKEY');
     var cid = ScriptProperties.getProperty('RJMETRICSCID');
     var url = 'https://connect.rjmetrics.com/v2/client/' + cid + '/table/' + tablename + '/data?apikey=' + api;
@@ -70,9 +72,10 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet, newkey){
 
 // For sending the entire document, if less than 100 rows, or for sending the remainder of a large document after the loop of 100 records at a time.
 function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet, newkey){
-  //Logger.log('starting last rows');
+  Logger.log('starting last rows');
   //Logger.log('rows ' + firstrow + " - " + lastrow);
-  var datarange = sheet.getRange(firstrow, 1, lastrow, lastcolumn);
+  var length_left = lastrow - firstrow
+  var datarange = sheet.getRange(firstrow, 1, length_left, lastcolumn);
   var spreadsheetdata = getRowsData(sheet, datarange, 1);
   var payload_pre = insertKeys(spreadsheetdata, newkey);
   //Logger.log("Payload Length" + spreadsheetdata.length);
