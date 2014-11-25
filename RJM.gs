@@ -70,9 +70,10 @@ function largedoc(lastrow, lastcolumn, i, tablename, sheet, newkey){
 
 // For sending the entire document, if less than 100 rows, or for sending the remainder of a large document after the loop of 100 records at a time.
 function smalldoc(lastrow, lastcolumn, i, firstrow, tablename, sheet, newkey){
-  //Logger.log('starting last rows');
+  Logger.log('starting last rows');
   //Logger.log('rows ' + firstrow + " - " + lastrow);
-  var datarange = sheet.getRange(firstrow, 1, lastrow, lastcolumn);
+  var length_left = lastrow - firstrow
+  var datarange = sheet.getRange(firstrow, 1, length_left, lastcolumn);
   var spreadsheetdata = getRowsData(sheet, datarange, 1);
   var payload_pre = insertKeys(spreadsheetdata, newkey);
   //Logger.log("Payload Length" + spreadsheetdata.length);
