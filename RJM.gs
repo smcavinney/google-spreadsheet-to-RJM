@@ -11,7 +11,7 @@ function push(){
   var tablename = sheet.getSheetName();
   var firstrow = 2
 // last row minus 1 assuming the first row is headers
-  var lastrow = range.getLastRow() - 1;
+  var lastrow = range.getLastRow() + 1;
   var i = 101;
 
   if (lastrow > i){
